@@ -38,7 +38,7 @@ builder.add_node("tools", ToolNode([multiply]))
 
 builder.add_edge(START, "tool_calling_llm")
 builder.add_conditional_edges("tool_calling_llm", tools_condition)
-builder.add_edge("tools", END)
+builder.add_edge("tools", tool_calling_llm)
 graph = builder.compile()
 
 messages = graph.invoke({"messages": HumanMessage(content="multiply 2 and 3")})['messages']
