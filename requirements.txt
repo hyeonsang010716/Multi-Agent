@@ -3,3 +3,4 @@ langchain-core
 langchain-community
 langchain-openai
 langgraph_sdk
+pdfplumber
