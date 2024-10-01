@@ -4,3 +4,4 @@ langchain-community
 langchain-openai
 langgraph_sdk
 pdfplumber
+langgraph-checkpoint-sqlite
