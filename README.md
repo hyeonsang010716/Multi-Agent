@@ -1,2 +1,2 @@
-# LangGraph
-A repo to help you learn LangGraph
+# LangGraph & Swarm
+A repo to help you learn LangGraph and Swarm
