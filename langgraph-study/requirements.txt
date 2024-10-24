@@ -5,3 +5,4 @@ langchain-openai
 langgraph_sdk
 pdfplumber
 langgraph-checkpoint-sqlite
+util_functions
