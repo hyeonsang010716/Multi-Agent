@@ -1,5 +1,5 @@
 from typing import Literal, Optional, TypedDict
-from langgraph.graph import StateGraph, END
+from langgraph.graph import StateGraph, END , START
 
 
 # 쿼리에서 "in" 다음에 오는 단어를 찾는 기능
