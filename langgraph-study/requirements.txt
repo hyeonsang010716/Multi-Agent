@@ -6,3 +6,5 @@ langgraph_sdk
 pdfplumber
 langgraph-checkpoint-sqlite
 util_functions
+langchain_chroma
+python-docx

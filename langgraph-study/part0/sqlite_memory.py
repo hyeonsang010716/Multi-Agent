@@ -78,8 +78,7 @@ def weather_generate_response(state: State):
     {input}
 
     날짜 정보:
-    {weather}
-    """
+    {weather}"""
     model = ChatOpenAI(model="gpt-4o")
     prompt = PromptTemplate(
         template=template_str,
@@ -94,9 +93,6 @@ def weather_generate_response(state: State):
 
     response = chain.invoke({"input": state["messages"] , "weather" : state["weather"]})
 
-    print("this is response" , response)
-    print("state_messages", state["messages"])
-
     return {"messages": [AIMessage(response)]}
 
 
@@ -106,9 +102,7 @@ def generate_response(state: State):
     유저의 질문을 절대 출력하지마세요.
     
     유저 입력:
-    {input}
-
-    """
+    {input}"""
     model = ChatOpenAI(model="gpt-4o")
     prompt = PromptTemplate(
         template=template_str,
@@ -122,7 +116,6 @@ def generate_response(state: State):
     )
 
     response = chain.invoke({"input" : state["messages"]})
-    print("this is response" , response)
     return {"messages": [AIMessage(response)]}
 
 
@@ -153,23 +146,17 @@ config = {"configurable": {"thread_id": "1"}}
 # print(graph.invoke({"messages": ["29999년12월30일은 무슨 요일이야?"]}, config,))
 
 # print(graph.invoke({"messages": ["내가 무슨 질문을 했었지?"]}, config,))
-for chunk_msg, metadata in graph.stream(
-    {"messages": ["29999년12월30일은 무슨 요일이야?"]}, config, stream_mode="messages"
-):  
-    if metadata["langgraph_node"] == "weather_generate_response":
-        if chunk_msg.content:
-            print(chunk_msg.content, end="", flush=True)
-
-    if metadata["langgraph_node"] == "generate_response":
-        if chunk_msg.content:
-            print(chunk_msg.content, end="", flush=True)
+for event in graph.stream(
+    {"messages": ["29999년12월30일은 무슨 요일이야?"]}, config = config):  
+    for value in event.values():
+        value["messages"][-1].pretty_print()
 
 for chunk_msg, metadata in graph.stream(
-    {"messages": ["내가 무슨 질문을 했었지?"]}, config, stream_mode="messages"
+    {"messages": ["내가 무슨 질문을 했었지?"]}, config = config, stream_mode="messages"
 ):  
-    if metadata["langgraph_node"] == "weather_generate_response":
-        if chunk_msg.content:
-            print(chunk_msg.content, end="", flush=True)
+    # if metadata["langgraph_node"] == "weather_generate_response":
+    #     if chunk_msg.content:
+    #         print(chunk_msg.content, end="", flush=True)
 
     if metadata["langgraph_node"] == "generate_response":
         if chunk_msg.content:
